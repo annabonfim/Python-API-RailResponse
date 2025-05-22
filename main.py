@@ -47,7 +47,11 @@ async def notificar_alerta(request: Request):
 
 @app.get("/alertas")
 def listar_alertas():
-    return buscar_todos()
+    alertas = buscar_todos()
+    for alerta in alertas:
+        if isinstance(alerta.get("hora"), datetime):
+            alerta["hora"] = alerta["hora"].isoformat()
+    return alertas
 
 from fastapi import Path
 from storage_oracle import atualizar_alerta, deletar_alerta
