@@ -1,0 +1,24 @@
+# Ambientes virtuais
+.venv/
+env/
+venv/
+ENV/
+
+# Caches do Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Configurações do PyCharm
+.idea/
+
+# Arquivos de sistema/macOS
+.DS_Store
+
+# Arquivo de variáveis sensíveis
+.env
+
+# Arquivos de teste HTTP
+*.http
