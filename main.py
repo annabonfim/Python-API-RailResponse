@@ -31,6 +31,7 @@ def home():
 async def notificar_alerta(request: Request):
     data = await request.json()
 
+    br_tz = pytz.timezone("America/Sao_Paulo")
     alerta = {
         "trem": data["trem"],
         "sistema": data["sistema"],
