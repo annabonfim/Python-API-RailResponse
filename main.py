@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from datetime import datetime
+import pytz
 from alerta_classifier import classificar_alerta
 from notificacao import enviar_alerta_critica
 from storage_oracle import salvar_no_banco, buscar_todos
