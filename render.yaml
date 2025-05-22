@@ -5,4 +5,7 @@ services:
     env: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn main:app -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: PORT
+        value: 10000
     plan: free

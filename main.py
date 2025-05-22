@@ -8,7 +8,13 @@ from dotenv import load_dotenv
 from apscheduler.schedulers.background import BackgroundScheduler
 load_dotenv()
 
+
 app = FastAPI()
+
+# Endpoint de status/boas-vindas
+@app.get("/")
+def home():
+    return {"mensagem": "API RailResponse está online!"}
 
 @app.post("/notificar")
 async def notificar_alerta(request: Request):
