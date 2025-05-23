@@ -50,6 +50,7 @@ async def notificar_alerta(request: Request):
 @app.get("/alertas")
 def listar_alertas():
     alertas = buscar_todos()
+    br_tz = pytz.timezone("America/Sao_Paulo")
     for alerta in alertas:
         if isinstance(alerta.get("hora"), datetime):
             alerta["hora"] = alerta["hora"].isoformat()
