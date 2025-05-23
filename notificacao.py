@@ -18,7 +18,7 @@ def enviar_alerta_critica(alerta):
         f"• Linha: {alerta.get('linha', 'N/D')}\n"
         f"• Estação: {alerta.get('estacao', 'N/D')}\n"
         f"• Sistema: {alerta.get('sistema', 'N/D').capitalize()}\n"
-        f"• Horário: {alerta.get('hora', 'N/D')}\n"
+        f"• Horário: {hora_formatada}\n"
         f"• Detalhes: {alerta.get('mensagem', '')}\n\n"
         f"⚠️ Encaminhar imediatamente à equipe responsável."
     )
