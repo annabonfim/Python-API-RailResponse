@@ -1,5 +1,6 @@
 from twilio.rest import Client
 import os
+from datetime import datetime, timedelta, timezone
 
 def enviar_alerta_critica(alerta):
     print(f"[TWILIO] Enviando alerta crítico via WhatsApp: {alerta['mensagem']}")
@@ -40,5 +41,3 @@ def enviar_alerta_critica(alerta):
         to=to_whatsapp
     )
     print(f"[TWILIO] Mensagem enviada com SID: {message.sid}")
-
-
