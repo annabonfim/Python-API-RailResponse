@@ -32,7 +32,10 @@ def buscar_todos():
             ORDER BY HORA DESC FETCH FIRST 50 ROWS ONLY
         """)
         colunas = [col[0].lower() for col in cursor.description]
-        return [dict(zip(colunas, row)) for row in cursor.fetchall()]
+        resultado = [dict(zip(colunas, row)) for row in cursor.fetchall()]
+        for item in resultado:
+            item["id"] = item["id_alerta"]
+        return resultado
 
 
 # Funções para atualizar e deletar alertas
