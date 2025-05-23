@@ -10,6 +10,17 @@ def enviar_alerta_critica(alerta):
     from_whatsapp = os.getenv("TWILIO_FROM")  # Ex: "whatsapp:+14155238886"
     to_whatsapp = os.getenv("TWILIO_TO")      # Ex: "whatsapp:+55SEUNUMERO"
 
+    hora = alerta.get("hora", "N/D")
+    if hora != "N/D":
+        try:
+            hora_dt = datetime.fromisoformat(hora)
+            hora_br = hora_dt.astimezone(timezone(timedelta(hours=-3)))
+            hora_formatada = hora_br.strftime("%d/%m/%Y %H:%M:%S")
+        except Exception:
+            hora_formatada = hora
+    else:
+        hora_formatada = "N/D"
+
     # Envia a mensagem
     client = Client(account_sid, auth_token)
     mensagem = (
