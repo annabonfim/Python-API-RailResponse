@@ -36,7 +36,7 @@ async def notificar_alerta(request: Request):
         "trem": data["trem"],
         "sistema": data["sistema"],
         "mensagem": data["mensagem"],
-        "hora": datetime.now(br_tz).isoformat()
+        "hora": datetime.now(br_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
     }
 
     alerta["prioridade"] = classificar_alerta(alerta)

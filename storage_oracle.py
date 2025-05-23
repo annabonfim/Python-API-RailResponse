@@ -26,13 +26,14 @@ def salvar_no_banco(alerta):
     print(f"[DB] Alerta salvo: {alerta['mensagem']}")
 
 def buscar_todos():
-    cursor.execute("""
-        SELECT TREM, SISTEMA, MENSAGEM, PRIORIDADE, HORA
-        FROM ALERTAS
-        ORDER BY HORA DESC FETCH FIRST 50 ROWS ONLY
-    """)
-    colunas = [col[0].lower() for col in cursor.description]
-    return [dict(zip(colunas, row)) for row in cursor.fetchall()]
+    with conn.cursor() as cursor:
+        cursor.execute("""
+            SELECT TREM, SISTEMA, MENSAGEM, PRIORIDADE, HORA
+            FROM ALERTAS
+            ORDER BY HORA DESC FETCH FIRST 50 ROWS ONLY
+        """)
+        colunas = [col[0].lower() for col in cursor.description]
+        return [dict(zip(colunas, row)) for row in cursor.fetchall()]
 
 
 # Funções para atualizar e deletar alertas
