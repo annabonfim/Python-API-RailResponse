@@ -103,7 +103,7 @@ scheduler = BackgroundScheduler()
 def alerta_simulado():
     alerta = gerar_alerta_simulado()
     br_tz = pytz.timezone("America/Sao_Paulo")
-    alerta["hora"] = datetime.now(br_tz).isoformat()
+    alerta["hora"] = datetime.now(br_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
     alerta["prioridade"] = classificar_alerta(alerta)
     salvar_no_banco(alerta)
 
