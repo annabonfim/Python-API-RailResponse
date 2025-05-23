@@ -53,7 +53,7 @@ def listar_alertas():
     br_tz = pytz.timezone("America/Sao_Paulo")
     for alerta in alertas:
         if isinstance(alerta.get("hora"), datetime):
-            alerta["hora"] = alerta["hora"].isoformat()
+            alerta["hora"] = alerta["hora"].astimezone(br_tz).isoformat()
     return alertas
 
 from fastapi import Path
