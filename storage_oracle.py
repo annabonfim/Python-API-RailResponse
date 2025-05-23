@@ -9,11 +9,6 @@ conn = oracledb.connect(
 )
 
 def salvar_no_banco(alerta):
-    conn = oracledb.connect(
-        user="rm559561",
-        password="200702",
-        dsn="oracle.fiap.com.br:1521/ORCL"
-    )
     sql = """
         INSERT INTO ALERTAS (TREM, SISTEMA, MENSAGEM, PRIORIDADE, HORA)
         VALUES (:1, :2, :3, :4, TO_TIMESTAMP(:5, 'YYYY-MM-DD"T"HH24:MI:SS.FF'))
@@ -27,21 +22,23 @@ def salvar_no_banco(alerta):
             alerta["hora"]
         ))
     conn.commit()
-    conn.close()
     print(f"[DB] Alerta salvo: {alerta['mensagem']}")
 
 def buscar_todos():
-    with conn.cursor() as cursor:
-        cursor.execute("""
-            SELECT ID_ALERTA, TREM, SISTEMA, MENSAGEM, PRIORIDADE, HORA
-            FROM ALERTAS
-            ORDER BY HORA DESC FETCH FIRST 50 ROWS ONLY
-        """)
-        colunas = [col[0].lower() for col in cursor.description]
-        resultado = [dict(zip(colunas, row)) for row in cursor.fetchall()]
-        for item in resultado:
-            item["id"] = item["id_alerta"]
-        return resultado
+    with oracledb.connect(
+        user="rm559561",
+        password="200702",
+        dsn="oracle.fiap.com.br:1521/ORCL"
+    ) as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                SELECT ID_ALERTA, TREM, SISTEMA, MENSAGEM, PRIORIDADE, HORA
+                FROM ALERTAS
+                ORDER BY ID_ALERTA DESC
+            """)
+            colunas = [col[0].lower() for col in cursor.description]
+            resultado = [dict(zip(colunas, row)) for row in cursor.fetchall()]
+            return resultado
 
 
 # Funções para atualizar e deletar alertas
