@@ -27,6 +27,7 @@ def salvar_no_banco(alerta):
             alerta["hora"]
         ))
     conn.commit()
+    conn.close()
     print(f"[DB] Alerta salvo: {alerta['mensagem']}")
 
 def buscar_todos():
