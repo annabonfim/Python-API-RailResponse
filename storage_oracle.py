@@ -9,6 +9,11 @@ conn = oracledb.connect(
 )
 
 def salvar_no_banco(alerta):
+    conn = oracledb.connect(
+        user="rm559561",
+        password="200702",
+        dsn="oracle.fiap.com.br:1521/ORCL"
+    )
     sql = """
         INSERT INTO ALERTAS (TREM, SISTEMA, MENSAGEM, PRIORIDADE, HORA)
         VALUES (:1, :2, :3, :4, TO_TIMESTAMP(:5, 'YYYY-MM-DD"T"HH24:MI:SS.FF'))
